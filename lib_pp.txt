@@ -1,0 +1,4 @@
+paddlehub
+paddlepaddle
+shapely
+pyclipper
