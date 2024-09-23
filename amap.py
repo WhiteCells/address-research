@@ -2,6 +2,11 @@ import json
 
 import requests
 
+"""
+@auther: gql
+
+高德api接口
+"""
 
 class AmapApi:
     def __init__(self):
