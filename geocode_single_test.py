@@ -1,23 +1,17 @@
 import requests
 
+
 key = 'a5d9c797e4599abbbacc692fd9abac50'
 url = "https://restapi.amap.com/v3/geocode/geo"
-file = 'unique_jx_ocr.txt'
-out_file = 'belong_jx3.txt'
-
-# 文件的行数
-file_line_count = 0
-# 成功匹配的行数
-matched_line_count = 0
+city_code = 420115
 
 def is_location_in_city(address, target_city):
-    global matched_line_count
-    # 构建请求参数
     params = {
         'key': key,
         'address': address,
-        'city':420115
+        'city': city_code
     }
+    
     response = requests.get(url, params=params)
     
     if response.status_code != 200:
@@ -36,27 +30,23 @@ def is_location_in_city(address, target_city):
     
     geocode = result['geocodes'][0]
     district = geocode['district']
-    # print(district)
-    # print(geocode)
-    # 检查返回的城市信息是否包含目标城市
+    print(district)
+    print(geocode)
+    
     if district == target_city:
         print(f"{address} 属于 {target_city}")
-        with open(out_file, 'a', encoding="utf-8") as f:
+        with open('belong_jx.txt', 'a', encoding="utf-8") as f:
             f.write('address:' + str(params['address']) +
                     ',province:' + str(geocode['province']) +
                     ',city:'+ str(geocode['city']) +
                     ',district:'+ str(geocode['district']) +
                     ',level:'+ str(geocode['level']) +
                     ',location:' + str(geocode['location']) + '\n')
-        matched_line_count +=  1
         return True
 
     return False
 
+src_address = input('输入源地址: ')
+dest_address = input('输入目标地址: ')
 
-with open(file, 'r', encoding='utf-8') as f:
-    for line in f:
-        file_line_count += 1
-        parts = line.split(',', 1)
-        text = parts[0].split(':', 1)[1].strip()
-        is_location_in_city(text, "江夏区")
+is_location_in_city(src_address, dest_address)

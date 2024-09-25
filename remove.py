@@ -1,19 +1,19 @@
-"""
-地图地址去重
-@auther
-
-@a
-"""
-
 import re
+
 # 去重操作
 # 读取文件，然后按行处理，使用字典来跟踪已看到的text值
 seen_texts = set()
 unique_lines = []
+
+input_file = 'jx_ocr.txt'
+output_file = 'unique_jx_ocr.txt'
+
 #去掉text属性中只有数字或英文的
 def is_numeric_or_english(text):
      return bool(re.match(r'^[a-zA-Z0-9]+$', text))
-with open('demo_z63.txt', 'r', encoding='utf-8') as file:
+
+
+with open(input_file, 'r', encoding='utf-8') as file:
     for line in file:
         # 假设每行的第一个属性总是text，我们可以简单地通过分割来找到它
         parts = line.split(',', 1)  # 只分割一次，以找到text属性
@@ -24,8 +24,9 @@ with open('demo_z63.txt', 'r', encoding='utf-8') as file:
                seen_texts.add(text)
                unique_lines.append(line)
 
-        # 现在将去重后的行写回文件或进行其他处理
-with open('newdemo_z63.txt', 'w', encoding='utf-8') as file:
+
+# 现在将去重后的行写回文件或进行其他处理
+with open(output_file, 'w', encoding='utf-8') as file:
     for line in unique_lines:
         file.write(line)
 

@@ -6,6 +6,8 @@
 
 /ocr_res16
 
+/jx_ocr_res
+
 demo_*
 
 macheng_*
@@ -15,6 +17,3 @@ uuid_demo.py
 newdemo_*
 
 address.log
-
-
-
