@@ -12,7 +12,7 @@ os.environ["OPENCV_IO_MAX_IMAGE_PIXELS"] = pow(2, 40).__str__()
 ocr = hub.Module(name="chinese_ocr_db_crnn_server")
 
 # 打开图像
-pil_img = Image.open('macheng_z10 (7).png')
+pil_img = Image.open('D:\\map\huanggang_hongan\\tile-merge\\z=16.png')
 width, height = pil_img.size
 
 
@@ -25,7 +25,7 @@ num_steps_width = (width - window_size[0]) // step_size[0] + 1 if width > window
 num_steps_height = (height - window_size[1]) // step_size[1] + 1 if height > window_size[1] else 1
 
 # 打开文件以写入识别结果
-with open('demo_z64.txt', 'a', encoding="utf-8") as f:
+with open('ocr/huanggang_hongan.txt', 'a', encoding="utf-8") as f:
     # 遍历每个滑动窗口
     for i in range(num_steps_height):
         for j in range(num_steps_width):
@@ -50,7 +50,7 @@ with open('demo_z64.txt', 'a', encoding="utf-8") as f:
             results = ocr.recognize_text(
                 images=[chunk_cv],
                 use_gpu=False,
-                output_dir='ocr_res161',
+                output_dir='ocr_huanggang_hongan',
                 visualization=True,
                 box_thresh=0.5,
                 text_thresh=0.5

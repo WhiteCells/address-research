@@ -30,13 +30,15 @@ def is_location_in_city(address, target_city):
     
     geocode = result['geocodes'][0]
     district = geocode['district']
+    formatted_address = geocode['formatted_address']
     print(district)
     print(geocode)
+    print(formatted_address)
     
     if district == target_city:
         print(f"{address} 属于 {target_city}")
-        with open('belong_jx.txt', 'a', encoding="utf-8") as f:
-            f.write('address:' + str(params['address']) +
+        with open('singal.txt', 'a', encoding="utf-8") as f:
+            f.write('formatted_address:' + str(geocode['formatted_address']) +
                     ',province:' + str(geocode['province']) +
                     ',city:'+ str(geocode['city']) +
                     ',district:'+ str(geocode['district']) +
