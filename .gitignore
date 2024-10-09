@@ -1,19 +1,13 @@
-/.idea
+# idea
+**/.idea
 
-/ocr_result
+# pycache
+**/__pycache__
 
-/ocr_res2
+# 所有模块的结果文件
+**/res/**
+!**/res/.gitkeep
 
-/ocr_res16
-
-/jx_ocr_res
-
-demo_*
-
-macheng_*
-
-uuid_demo.py
-
-newdemo_*
-
-address.log
+# 下载的地图图片
+/map/**
+!map/**/.gitkeep
