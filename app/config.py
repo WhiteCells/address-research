@@ -1,25 +1,25 @@
 from pathlib import Path
 
 class MapConfig:
-    DIR_PATH = Path('.') / 'map'
+    DIR_PATH = './map'
     
 
 class OcrConfig:
-    INPUT_PATH = MapConfig.DIR_PATH # + <rank>
-    OUTPUT_PATH = './res/ocr/res/' # + <filename>
+    INPUT_PATH = MapConfig.DIR_PATH
+    OUTPUT_PATH = './res/ocr'
 
 
 class UnrepeatedConfig:
-    INPUT_PATH = OcrConfig.OUTPUT_PATH # 需要去重的地址目录
-    OUTPUT_PATH = './res/unrepeated/res/' # + <filename> 去重后的地址保存目录
+    INPUT_PATH = OcrConfig.OUTPUT_PATH
+    OUTPUT_PATH = './res/unrepeated'
 
 
 class AMapApiConfig:
     KEY = 'a5d9c797e4599abbbacc692fd9abac50'
     GEO_URL = 'https://restapi.amap.com/v3/geocode/geo?'
     REGEO_URL = 'https://restapi.amap.com/v3/geocode/regeo?'
-    INPUT_PATH = UnrepeatedConfig.INPUT_PATH # + <filename> 待验证地址
-    OUTPUT_PATH = './res/amap/res/'
+    INPUT_PATH = UnrepeatedConfig.INPUT_PATH
+    OUTPUT_PATH = './res/amap'
 
 
 class DBConfig:

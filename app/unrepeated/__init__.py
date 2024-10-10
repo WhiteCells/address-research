@@ -1,2 +1,1 @@
-from .config import UnrepeatedConfig
-# from .unrepeated import unrepeated
+from .unrepeated import process_res_ocr_dir

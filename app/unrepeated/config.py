@@ -1,2 +1,0 @@
-class UnrepeatedConfig:
-    xxx = 'abc'

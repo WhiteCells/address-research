@@ -2,3 +2,4 @@ paddlehub
 paddlepaddle
 shapely
 pyclipper
+openpyxl

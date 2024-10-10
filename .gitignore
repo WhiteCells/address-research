@@ -8,6 +8,6 @@
 **/res/**
 !**/res/.gitkeep
 
-# 下载的地图图片
+# 地图图片
 /map/**
 !map/**/.gitkeep

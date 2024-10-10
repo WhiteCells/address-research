@@ -21,23 +21,33 @@ step_size = (512, 512)
 """
 OCR 识别单文件
 """
-def ocr_map(file):
-    # 文件名（无后缀）
-    filename = os.path.basename(file).split('.')[0]
-    print('=====> ', filename)
-    
+def ocr_map(file_path):
     # 打开图像
-    pil_img = Image.open(file)
+    pil_img = Image.open(file_path)
     width, height = pil_img.size
     
     # 计算滑动次数
     num_steps_width = (width - window_size[0]) // step_size[0] + 1 if width > window_size[0] else 1
     num_steps_height = (height - window_size[1]) // step_size[1] + 1 if height > window_size[1] else 1
 
-    # 没有目录就创建目录 f'{OcrConfig.OUTPUT_PATH}\\{filename}.txt'
+    # 文件名（无后缀） map\15\高德_湖北省_武汉市_江夏区_15.png
+    filename = os.path.basename(file_path).split('.')[0]
+    print('filename: ', filename)
 
-    # 打开文件以写入识别结果
-    with open(f'{OcrConfig.OUTPUT_PATH}\\{filename}.txt', 'a', encoding="utf-8") as f:
+    # 获取地图等级
+    rank = filename.split('_')[-1]
+    print('=> rank: ', rank)
+    
+    # 创建 OCR 输出目录
+    if not os.path.exists(f'{OcrConfig.OUTPUT_PATH}'):
+        os.mkdir(f'{OcrConfig.OUTPUT_PATH}')
+    
+    # 创建地图等级目录
+    if not os.path.exists(f'{OcrConfig.OUTPUT_PATH}/{rank}'):
+        os.mkdir(f'{OcrConfig.OUTPUT_PATH}/{rank}')
+    
+    # 结果保存至对应的等级目录
+    with open(f'{OcrConfig.OUTPUT_PATH}/{rank}/{filename}.txt', 'a', encoding="utf-8") as f:
         # 遍历每个滑动窗口
         for i in range(num_steps_height):
             for j in range(num_steps_width):
@@ -51,7 +61,6 @@ def ocr_map(file):
                 chunk_pil = pil_img.crop((left, top, right, bottom))
                 chunk_cv = np.array(chunk_pil)
 
-
                 if len(chunk_cv.shape) == 3:
                     if chunk_cv.shape[2] == 4:
                         chunk_cv = cv2.cvtColor(chunk_cv, cv2.COLOR_RGBA2BGR)
@@ -62,7 +71,7 @@ def ocr_map(file):
                 results = ocr.recognize_text(
                     images=[chunk_cv],
                     use_gpu=False,
-                    output_dir='./ocr/chunk',
+                    output_dir='./res/ocr/chunk',
                     visualization=True,
                     box_thresh=0.5,
                     text_thresh=0.5
@@ -85,15 +94,15 @@ def ocr_map(file):
                             infomation['text_box_position']) + '\n')
 
 
-"""
-处理地图目录文件
-"""
 def process_map_dir():
-    print('=========', OcrConfig.INPUT_PATH)
+    """
+    处理配置 OcrConfig.INPUT_PATH 指定的地图目录
+    """
+    print('=> OCR INPUT_PATH: ', OcrConfig.INPUT_PATH)
     for root, dirs, files in os.walk(OcrConfig.INPUT_PATH):
         for file in files:
             if file.endswith(".png"):
-                print(os.path.join(root, file))
+                print('=> processing: ', os.path.join(root, file))
                 ocr_map(os.path.join(root, file))
     
     
