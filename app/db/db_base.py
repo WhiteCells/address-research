@@ -1,3 +1,5 @@
+import sys
+
 import pymysql
 
 from amap import AmapApi
@@ -29,7 +31,7 @@ UPDATE `address-research-mater`.`addresses` SET `township` = NULL WHERE `id` = 1
 """
 
 
-def se_db():
+def se_db(table):
     # 连接到数据库
     try:
         connection = pymysql.connect(**db_config)
@@ -38,7 +40,7 @@ def se_db():
         # 创建一个cursor对象
         with connection.cursor() as cursor:
             # 编写SQL查询语句
-            sql = "SELECT * FROM `address-research-mater`.`addresses`"
+            sql = f"SELECT * FROM `address-research-mater`.`{table}` WHERE `township` IS NULL"
 
             # 执行SQL语句
             cursor.execute(sql)
@@ -48,10 +50,12 @@ def se_db():
 
             # 打印结果
             for row in results:
-                # print(row)  # 如果你设置了cursorclass为DictCursor，这里可以直接用print(row['id'], row['name'])来访问字段
+                print(row)  # 如果你设置了cursorclass为DictCursor，这里可以直接用print(row['id'], row['name'])来访问字段
+
                 township = amap_api.amap_api_re_geo(row['location'])
+                print(township)
                 if township != "":
-                    update_db(township, row['id'])
+                    update_db(table, township, row['id'])
 
 
     except pymysql.MySQLError as e:
@@ -65,7 +69,7 @@ def se_db():
             print("数据库连接已关闭")
 
 
-def update_db(township, id_):
+def update_db(table, township, id_):
     # 连接到数据库
     try:
         connection = pymysql.connect(**db_config)
@@ -75,7 +79,7 @@ def update_db(township, id_):
         with connection.cursor() as cursor:
             # 编写SQL更新语句
             # 注意：使用参数化查询来防止SQL注入
-            sql = "UPDATE `address-research-mater`.`addresses` SET `township` = %s WHERE `id` = %s;"
+            sql = f"UPDATE `address-research-mater`.`{table}` SET `township` = %s WHERE `id` = %s;"
 
             # 执行SQL语句
             cursor.execute(sql, (township, id_))
@@ -99,4 +103,8 @@ def update_db(township, id_):
             print("数据库连接已关闭")
 
 
-se_db()
+table_name = "hg_amap_address"
+se_db(table_name)
+
+# township = amap_api.amap_api_re_geo('114.754592,31.022195')
+# print(township)
