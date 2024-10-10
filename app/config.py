@@ -23,10 +23,23 @@ class AMapApiConfig:
 
 
 class DBConfig:
-    DB_NAME = 'jx_ocr'
+    INPUT_PATH = AMapApiConfig.OUTPUT_PATH
+    DATATABLE = 'geocode_huanggang_'
+    # sql = f"""
+    # INSERT INTO `{DATABASE}`
+    # (address, ocr_address, province, city, district, level, location, township)
+    # VALUES (%s, %s, %s, %s, %s, %s, %s ,%s);
+    # """
+
+    HOST = 'localhost'
+    USER = 'root'
+    PASSWORD = '123456'
+    DATABASE = 'text'
+
     # HOST = '192.168.10.59',
     # 'user': 'research',
     # 'password': '6usKz1Pi8aQ7q8WL',
     # 'database': 'address-research-mater',
     # 'charset': 'utf8mb4',
     # 'cursorclass': pymysql.cursors.DictCursor
+
