@@ -1,5 +1,5 @@
 # ocr 模块中记录的需要逃过的地址行号
-repeated_lines = {}
+repeated_lines = set()
 
 
 class MapConfig:

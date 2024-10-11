@@ -101,7 +101,7 @@ def process_res_unrepeated_dir():
             
             # 从 citycode.xlsx 中查找 target_district 对应的 adcode
             df = pd.read_excel('./app/amap_api/citycode.xlsx')
-            adcode = df.loc[df['中文名'] == '江夏区', 'adcode'].values[0]
+            adcode = df.loc[df['中文名'] == target_district, 'adcode'].values[0]
             
             # 确保 res/amap 目录存在
             if not os.path.exists(AMapApiConfig.OUTPUT_PATH):

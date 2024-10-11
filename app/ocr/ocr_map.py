@@ -123,7 +123,7 @@ def ocr_map(file_path):
                                                f"line: {line_cnt}\n"
                                         f.write(line)
                                         matched = True
-                                        repeated_lines.append(line_cnt)
+                                        repeated_lines.add(line_cnt)
                                         break
                             if matched:
                                 break
