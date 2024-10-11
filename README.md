@@ -3,7 +3,7 @@
 ### 安装依赖
 
 ```shell
-pip install -r requestments.txt -i https://pypi.tuna.tsinghua.edu.cn/simple 
+pip install -r requirements.txt -i https://pypi.tuna.tsinghua.edu.cn/simple 
 ```
 
 ### 项目结构
@@ -38,7 +38,6 @@ pip install -r requestments.txt -i https://pypi.tuna.tsinghua.edu.cn/simple
 2. OCR 识别：
     - 输入：下载地图的路径
     - 输出：识别的保存路径，`ocr/res/<map>_<province>_<city>_<district>_<rank>.txt`
-        - 例子：`ocr_res/高德_湖南省_洛阳市_新安县_15.txt`
  
 3. 地址去重：
     - 输入：需要去重的地址文件的路径，OCR 识别的保存路径

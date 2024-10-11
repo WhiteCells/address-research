@@ -100,7 +100,7 @@ def ocr_map(file_path):
                         
                         print('text_box_position:', infomation['text_box_position'])
                         
-                        line_ctn += 1
+                        line_cnt += 1
 
                         # 计算当前文本的区间
                         current_bucket = int(top_left_x // bucket_size)
