@@ -1,0 +1,1 @@
+from .amap_address_db import process_res_amap_dir

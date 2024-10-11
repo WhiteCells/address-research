@@ -3,3 +3,4 @@ paddlepaddle
 shapely
 pyclipper
 openpyxl
+pymysql

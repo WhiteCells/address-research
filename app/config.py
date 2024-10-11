@@ -1,4 +1,6 @@
-from pathlib import Path
+# ocr 模块中记录的需要逃过的地址行号
+repeated_lines = {}
+
 
 class MapConfig:
     DIR_PATH = './map'
