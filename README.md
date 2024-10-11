@@ -10,26 +10,30 @@ pip install -r requestments.txt -i https://pypi.tuna.tsinghua.edu.cn/simple
 
 ```sh
 ├─app
-│  ├─amp_api
-│  │  └─res
+│  ├─amap_api
+│  │  ├─__init__.py
+│  │  ├─amap_api.py
+│  │  └─citycode.xlsx
 │  ├─db
+│  │  ├─__init__.py
+│  │  └─amap_address_db.py
 │  ├─ocr
-│  │  ├─chunk
-│  │  └─res
+│  │  ├─__init__.py
+│  │  └─ocr_map.py
 │  └─unrepeated
-│     └─res
-└──map
-   ├─15
-   └─16
+│       ├─__init__.py
+│       └─unrepeated.py
+├─map
+├─res
+├─ .gitignore
+├─ app.py
+├─ README.md
+└─ requestments.txt
 ```
-
-- 代码复用
 
 1. 下载地图
     - 地图根目录命名方式：`<map>_<province>_<city>_<district>_<rank>`
-        - 例子：`高德_湖南省_洛阳市_新安县_15`
-    - OCR 识别的路径：`<map>_<province>_<city>_<district>_<rank>/tile-merge/z=<rank>.png`
-        - 例子：`高德_湖南省_洛阳市_新安县_15/tile-merge/z=15.png`
+    - OCR 识别的路径：`<map>/<rank>/<map>_<province>_<city>_<district>_<rank>.png`
 
 2. OCR 识别：
     - 输入：下载地图的路径
